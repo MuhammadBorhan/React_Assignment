@@ -42,9 +42,69 @@
     "brand": "hoodie"
   },
   {
-    "name": "Black Cotton Formal Shir",
+    "name": "Black Cotton Formal Shirt",
     "img": "https://static-01.daraz.com.bd/p/6516c8d348f7306a0e4fcb2d2280dd41.jpg",
     "price": 8,
     "brand": "shirt"
+  },
+  {
+    "name": "Brown Cotton Formal Shirt",
+    "img": "https://images-eu.ssl-images-amazon.com/images/I/71Bo9OtlEtL._AC._SR360,460.jpg",
+    "price": 8,
+    "brand": "shirt"
+  },
+  {
+    "name": "Casual & Formal Shirt",
+    "img": "https://images-eu.ssl-images-amazon.com/images/I/71yM0xUAetL._AC._SR360,460.jpg",
+    "price": 8,
+    "brand": "shirt"
+  },
+  {
+    "name": "Brown Cotton Formal Shir",
+    "img": "https://static-01.daraz.com.bd/p/ad4ce5a7512aed59c0a995a04c44efe4.jpg",
+    "price": 8,
+    "brand": "shirt"
+  },
+  {
+    "name": "Brown Cotton Formal Shir",
+    "img": "https://static-01.daraz.com.bd/p/9571a1148c60eda4758d880ea4de0bd9.jpg",
+    "price": 8,
+    "brand": "shirt"
+  },
+  {
+    "name": "Brown Cotton Formal Shir",
+    "img": "https://static-01.daraz.com.bd/p/451d1d6eeeb73bbb5fd7f58f11713ae4.jpg",
+    "price": 8,
+    "brand": "shirt"
+  },
+  {
+    "name": "Black Pant",
+    "img": "https://static-01.daraz.com.bd/p/4a1ba4ba8f7a8b94e120cace4a91d7d8.jpg",
+    "price": 8,
+    "brand": "pant"
+  },
+  {
+    "name": "Casual Cotton Gabardine pant",
+    "img": "https://shodagor-uploads.s3.ap-south-1.amazonaws.com/uploads/all/62tzv.jpg",
+    "price": 8,
+    "brand": "pant"
+  },
+  {
+    "name": "Fast Dry Trousers",
+    "img": "https://static-01.daraz.com.bd/p/db0931c5077aecfc9be3682edbdadb8d.jpg",
+    "price": 8,
+    "brand": "pant"
+  },
+  {
+    "name": "Dim Grey Formal Pant",
+    "img": "https://www.kablewala.com.bd/images/detailed/84/180_8otn-3i.jpg",
+    "price": 8,
+    "brand": "pant"
+  },
+  {
+    "name": "Slim Fit Soft Stretch",
+    "img": "https://static-01.daraz.com.bd/p/f6fddd97b0d5ad5f7c98109676ea05fe.jpg",
+    "price": 8,
+    "brand": "pant"
   }
 ]

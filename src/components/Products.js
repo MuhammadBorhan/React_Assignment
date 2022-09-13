@@ -33,7 +33,7 @@ const Products = () => {
                 </td>
                 <td>{name}</td>
                 <td>Blue</td>
-                <td>Blue</td>
+                <td>on-stock</td>
                 <td>${price}</td>
                 <td>Blue</td>
               </tr>
