@@ -1,6 +1,6 @@
 import React from "react";
 
-const Products = ({ products }) => {
+const Products = ({ products, searchItem }) => {
   return (
     <div className="overflow-x-auto mt-6">
       <table className="table w-full">
@@ -15,21 +15,31 @@ const Products = ({ products }) => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product, index) => {
-            const { img, name, price } = product;
-            return (
-              <tr key={index}>
-                <td>
-                  <img className="w-16" src={img} alt="" />
-                </td>
-                <td>{name}</td>
-                <td>Blue</td>
-                <td>in-stock</td>
-                <td>${price}</td>
-                <td>Blue</td>
-              </tr>
-            );
-          })}
+          {products
+            .filter((val) => {
+              if (searchItem === "") {
+                return val;
+              } else if (
+                val.name.toLowerCase().includes(searchItem.toLowerCase())
+              ) {
+                return val;
+              }
+            })
+            .map((product, index) => {
+              const { img, name, price } = product;
+              return (
+                <tr key={index}>
+                  <td>
+                    <img className="w-16" src={img} alt="" />
+                  </td>
+                  <td>{name}</td>
+                  <td>Blue</td>
+                  <td>in-stock</td>
+                  <td>${price}</td>
+                  <td>Blue</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>

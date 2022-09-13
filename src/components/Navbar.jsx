@@ -6,7 +6,8 @@ import Products from "./Products";
 import useProducts from "./useProducts";
 
 const Navbar = () => {
-  const [products, setProducts] = useProducts();
+  const [searchItem, setSearchItem] = useState("");
+  const [products] = useProducts();
   const [category, setCategory] = useState([]);
   const [item, setItem] = useState({ name: "All" });
   const [active, setActive] = useState(0);
@@ -15,10 +16,10 @@ const Navbar = () => {
     if (item.name === "All") {
       setCategory(products);
     } else {
-      const newProjects = products.filter((project) => {
+      const newProducts = products.filter((project) => {
         return project.brand.toLowerCase() === item.name;
       });
-      setCategory(newProjects);
+      setCategory(newProducts);
     }
   }, [item.name, products]);
 
@@ -67,12 +68,15 @@ const Navbar = () => {
             <input
               type="text"
               className="input input-bordered h-10 w-48 max-w-xs"
+              onChange={(event) => {
+                setSearchItem(event.target.value);
+              }}
             />
           </div>
           <button className="btn">Add To Cart</button>
         </div>
       </div>
-      <Products products={category}></Products>
+      <Products products={category} searchItem={searchItem}></Products>
     </div>
   );
 };
