@@ -1,5 +1,5 @@
 import React from "react";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaSmile } from "react-icons/fa";
 
 const Products = ({ products, searchItem }) => {
   return (
@@ -12,7 +12,8 @@ const Products = ({ products, searchItem }) => {
             <th className="capitalize text-xl">Color</th>
             <th className="capitalize text-xl">Stock</th>
             <th className="capitalize text-xl">Price</th>
-            <th className="capitalize text-xl pl-16">Buy</th>
+            <th className="capitalize text-xl">Available</th>
+            <th className="capitalize text-xl pl-20">Buy</th>
           </tr>
         </thead>
         <tbody>
@@ -27,16 +28,20 @@ const Products = ({ products, searchItem }) => {
               }
             })
             .map((product, index) => {
-              const { img, name, price } = product;
+              const { img, name, price, quantity } = product;
               return (
                 <tr key={index}>
                   <td>
                     <img className="w-16" src={img} alt="" />
                   </td>
-                  <td>{name}</td>
+                  <td className="text-blue-500 font-bold">{name}</td>
                   <td>Blue</td>
-                  <td>in-stock</td>
+                  <td className="flex items-center pt-12 gap-1 text-green-600 font-bold">
+                    {" "}
+                    <FaSmile /> <span>in-stock</span>
+                  </td>
                   <td>${price}</td>
+                  <td>{quantity} Pcs</td>
                   <td>
                     <input
                       className="border bg-gray-200 w-12 text-center font-bold"
@@ -45,7 +50,12 @@ const Products = ({ products, searchItem }) => {
                     <button className="mx-2 w-12 bg-black text-white px-4 py-1">
                       <FaShoppingCart />
                     </button>
-                    <input type="checkbox" name="" id="" />
+                    <input
+                      className="cursor-pointer"
+                      type="checkbox"
+                      name=""
+                      id=""
+                    />
                   </td>
                 </tr>
               );

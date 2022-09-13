@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { FaUndo } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-// import product data
+// import brand name and size from data.js
 import { selectBrand, selectSize } from "../data";
-import Products from "./Products";
+
+// import json data useProduct.jsx
 import useProducts from "./useProducts";
 
+import Products from "./Products";
+
 const Navbar = () => {
-  const [searchItem, setSearchItem] = useState("");
   const [products] = useProducts();
   const [category, setCategory] = useState([]);
   const [item, setItem] = useState({ name: "All" });
   const [active, setActive] = useState(0);
+
+  // Searching Functionality State
+  const [searchItem, setSearchItem] = useState("");
 
   useEffect(() => {
     if (item.name === "All") {
@@ -30,8 +37,8 @@ const Navbar = () => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-y-0">
-        <form className="flex items-center justify-center md:justify-start gap-x-4">
-          {/* Product selection */}
+        <form className="flex flex-col md:flex-row gap-y-3 md:gap-y-0 items-center justify-center md:justify-start gap-x-4">
+          {/* Product Brand selection */}
           <select className="select select-bordered w-40 max-w-xs">
             {selectBrand.map((item, index) => {
               return (
@@ -59,12 +66,16 @@ const Navbar = () => {
               return <option key={index}>{item.name}</option>;
             })}
           </select>
-          <input className="cursor-pointer" type="reset" value="Reset" />
+          <div className="flex items-center gap-1 text-blue-500 font-bold">
+            <FaUndo />
+            <input className="cursor-pointer" type="reset" value="Reset" />
+          </div>
         </form>
 
-        <div className="flex items-center justify-center md:justify-end gap-x-4">
+        {/* Search input */}
+        <div className="flex flex-col md:flex-row gap-y-3 md:gap-y-0 items-center justify-center md:justify-end gap-x-4">
           <div>
-            <label className="mr-2">Search:</label>
+            <label className="mr-2 text-xl">Search:</label>
             <input
               type="text"
               className="input input-bordered h-10 w-48 max-w-xs"
@@ -73,9 +84,16 @@ const Navbar = () => {
               }}
             />
           </div>
-          <button className="btn">Add To Cart</button>
+
+          {/* Add To Cart Button */}
+          <Link to="/checkout">
+            <button className="bg-blue-500 text-white font-bold px-5 py-2 rounded">
+              Add To Cart
+            </button>
+          </Link>
         </div>
       </div>
+
       <Products products={category} searchItem={searchItem}></Products>
     </div>
   );
