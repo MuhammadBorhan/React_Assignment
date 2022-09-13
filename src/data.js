@@ -19,6 +19,9 @@
 // categories product list
 export const selectBrand = [
   {
+    name: "All",
+  },
+  {
     name: "Hoodies",
   },
   {

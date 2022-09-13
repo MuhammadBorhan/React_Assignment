@@ -1,15 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-// product data
-
-const Products = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    fetch("product.json")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
+const Products = ({ products }) => {
   return (
     <div className="overflow-x-auto mt-6">
       <table className="table w-full">
@@ -33,7 +24,7 @@ const Products = () => {
                 </td>
                 <td>{name}</td>
                 <td>Blue</td>
-                <td>on-stock</td>
+                <td>in-stock</td>
                 <td>${price}</td>
                 <td>Blue</td>
               </tr>
