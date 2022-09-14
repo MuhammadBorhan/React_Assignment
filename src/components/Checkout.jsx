@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Checkout = () => {
   return (
-    <div className="flex px-8 py-4 gap-4">
-      <div className="w-[80%]">
+    <div className="flex flex-col md:flex-row px-8 py-4 gap-4">
+      <div className="md:w-[80%] w-[100%]">
         <div className="overflow-x-auto">
           <table className="table w-full">
             <thead>
@@ -45,7 +45,7 @@ const Checkout = () => {
 
       <div className="border rounded-sm">
         <div className="w-96 p-4">
-          <h2 className="card-title">Card totals</h2>
+          <h2 className="card-title mb-4">Card totals</h2>
           <div className="flex justify-between items-center">
             <p>Subtotal</p>
             <p>$200.00</p>

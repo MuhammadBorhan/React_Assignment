@@ -3,7 +3,7 @@ import { FaUndo } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 // import brand name and size from data.js
-import { selectBrand, selectSize } from "../data";
+import { brandProducts, selectBrand, selectSize } from "../data";
 
 // import json data useProduct.jsx
 import useProducts from "./useProducts";
@@ -11,24 +11,27 @@ import useProducts from "./useProducts";
 import Products from "./Products";
 
 const Navbar = () => {
-  const [products] = useProducts();
-  const [category, setCategory] = useState([]);
-  const [item, setItem] = useState({ name: "All" });
+  const [products, setProducts] = useProducts();
+  //   let itemsNew = products;
+  //   const [category, setCategory] = useState(itemsNew);
+
+  const [item, setItem] = useState({ name: "all" });
+  const [projects, setProjects] = useState([]);
   const [active, setActive] = useState(0);
 
   // Searching Functionality State
   const [searchItem, setSearchItem] = useState("");
 
   useEffect(() => {
-    if (item.name === "All") {
-      setCategory(products);
+    if (item.name === "all") {
+      setProjects(products);
     } else {
-      const newProducts = products.filter((project) => {
+      const newProjects = products.filter((project) => {
         return project.brand.toLowerCase() === item.name;
       });
-      setCategory(newProducts);
+      setProjects(newProjects);
     }
-  }, [item.name, products]);
+  }, [item, products]);
 
   const handleClick = (e, index) => {
     setItem({ name: e.target.textContent.toLowerCase() });
@@ -37,9 +40,12 @@ const Navbar = () => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-y-0">
-        <form className="flex flex-col md:flex-row gap-y-3 md:gap-y-0 items-center justify-center md:justify-start gap-x-4">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="flex flex-col md:flex-row gap-y-3 md:gap-y-0 items-center justify-center md:justify-start gap-x-4"
+        >
           {/* Product Brand selection */}
-          <select className="select select-bordered w-40 max-w-xs">
+          {/* <select className="select select-bordered w-40 max-w-xs">
             {selectBrand.map((item, index) => {
               return (
                 <option
@@ -47,16 +53,32 @@ const Navbar = () => {
                     handleClick(e, index);
                   }}
                   className={`${
-                    active === index ? "text-blue-500 font-bold" : ""
-                  }`}
+                    active === index ? "text-red-500" : ""
+                  } cursor-pointer capitalize m-4`}
                   key={index}
                 >
-                  -{item.name}
+                  {item.name}
                 </option>
               );
             })}
-          </select>
-
+          </select> */}
+          <ul className="flex flex-col md:flex-row  justify-evenly items-center text-black">
+            {selectBrand.map((item, index) => {
+              return (
+                <li
+                  onClick={(e) => {
+                    handleClick(e, index);
+                  }}
+                  className={`${
+                    active === index ? "text-red-500" : ""
+                  } cursor-pointer capitalize m-4`}
+                  key={index}
+                >
+                  {item.name}
+                </li>
+              );
+            })}
+          </ul>
           {/* Size Selection */}
           <select className="select select-bordered w-40 max-w-xs">
             <option disabled selected>
@@ -93,8 +115,7 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-
-      <Products products={category} searchItem={searchItem}></Products>
+      <Products products={projects} searchItem={searchItem}></Products>
     </div>
   );
 };
