@@ -26,7 +26,7 @@ const Products = ({ products }) => {
                   <img className="w-16" src={img} alt="" />
                 </td>
                 <td className="text-blue-500 font-bold">{name}</td>
-                <td>{color}</td>
+                <td className={color === 'green' ? 'text-green-500 capitalize font-bold' : color === 'blue' ? 'text-blue-600 capitalize font-bold' : color === 'pink' ? 'text-pink-500 capitalize font-bold' : 'capitalize font-bold'}>{color}</td>
                 <td className="flex items-center pt-12 gap-1 text-green-600 font-bold">
                   {" "}
                   <FaSmile /> <span>in-stock</span>

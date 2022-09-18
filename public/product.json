@@ -47,7 +47,7 @@
     "brand": "Hoodies",
     "quantity": 19,
     "size": "l",
-    "color": "Black"
+    "color": "pink"
   },
   {
     "id": 6,
@@ -77,7 +77,7 @@
     "brand": "Shirt",
     "quantity": 10,
     "size": "xl",
-    "color": "black"
+    "color": "pink"
   },
   {
     "id": 9,
@@ -137,7 +137,7 @@
     "brand": "Pant",
     "quantity": 10,
     "size": "xl",
-    "color": "black"
+    "color": "pink"
   },
   {
     "id": 15,

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 // import category wise product and size from data.js
 import { selectCategoryproduct, selectSize } from "../data";
 
+// import component
 import Products from "./Products";
 
 const Navbar = () => {
