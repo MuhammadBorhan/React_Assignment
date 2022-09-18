@@ -17,9 +17,6 @@ export const selectBrand = [
 // categories product list
 export const selectSize = [
   {
-    name: "Sm",
-  },
-  {
     name: "M",
   },
   {
