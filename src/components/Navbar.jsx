@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaUndo } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { FaShoppingCart, FaSmile } from "react-icons/fa";
 
-// import brand name and size from data.js
-import { brandProducts, selectBrand, selectSize } from "../data";
+// import category wise product and size from data.js
+import { selectCategoryproduct, selectSize } from "../data";
 
 import Products from "./Products";
 
@@ -13,8 +12,6 @@ const Navbar = () => {
   const [filterValue, setFilterValue] = useState([])
   const [selectCategory, setSelectCategory] = useState('all');
   const [size, setSize] = useState('size all');
-
-  // Searching Functionality State
   const [searchItem, setSearchItem] = useState("");
 
   useEffect(() => {
@@ -28,34 +25,34 @@ const Navbar = () => {
 
   useEffect(() => {
     if (selectCategory !== undefined) {
-      if (selectCategory == 'all' && size == 'size all') {
+      if (selectCategory === 'all' && size === 'size all') {
         if (searchItem !== '') {
-          const newValue = products.filter(product => (product.name.toLowerCase().includes(searchItem.toLowerCase())));
-          setFilterValue(newValue)
+          const newValue = filterValue.filter(product => (product.name.toLowerCase().includes(searchItem.toLowerCase())));
+          setProducts(newValue)
         } else {
-          setFilterValue(products)
+          setProducts(filterValue)
         }
-      } else if (selectCategory == 'all' && size !== 'size all' && searchItem == '') {
-        const newValue = products.filter(product => (product.size.toLowerCase() == size));
-        setFilterValue(newValue)
+      } else if (selectCategory === 'all' && size !== 'size all' && searchItem === '') {
+        const newValue = filterValue.filter(product => (product.size.toLowerCase() === size));
+        setProducts(newValue)
       } else if (searchItem !== '') {
-        const newValue = products.filter(product => (product.name.toLowerCase().includes(searchItem.toLowerCase())));
-        setFilterValue(newValue)
+        const newValue = filterValue.filter(product => (product.name.toLowerCase().includes(searchItem.toLowerCase())));
+        setProducts(newValue)
       } else if (size !== undefined) {
         if (size == 'size all') {
-          const newValue = products.filter(product => (product.brand == selectCategory && product.size !== size));
-          setFilterValue(newValue)
+          const newValue = filterValue.filter(product => (product.brand === selectCategory && product.size !== size));
+          setProducts(newValue)
         } else {
-          const newValue = products.filter(product => (product.brand == selectCategory && product.size == size));
-          setFilterValue(newValue)
+          const newValue = filterValue.filter(product => (product.brand === selectCategory && product.size === size));
+          setProducts(newValue)
         }
       } else {
-        const newValue = products.filter(product => (product.brand == selectCategory));
-        setFilterValue(newValue)
+        const newValue = filterValue.filter(product => (product.brand === selectCategory));
+        setProducts(newValue)
       }
     } else if (size !== 'size all') {
-      const newValue = products.filter(product => (product.size == size));
-      setFilterValue(newValue)
+      const newValue = filterValue.filter(product => (product.size === size));
+      setProducts(newValue)
     }
   }, [selectCategory, size, searchItem])
 
@@ -87,44 +84,31 @@ const Navbar = () => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-y-0">
-
-        <div
-          className="flex flex-col md:flex-row gap-y-3 md:gap-y-0 items-center justify-center md:justify-start gap-x-4"
-        >
+        <div className="flex flex-col md:flex-row gap-y-3 md:gap-y-0 items-center justify-center md:justify-start gap-x-4">
           {/* select products category */}
-          <select
-            onChange={(e) => {
-              setSelectCategory(e.target.value)
-            }}
+          <select onChange={(e) => { setSelectCategory(e.target.value) }}
             value={selectCategory}
-            className=' mr-3 border cursor-pointer border-gray-600 text-sm font-medium px-2 py-[2px]'>
-            <option value='all'>- All</option>
-            <option value='Hoodies'>- Hoodies</option>
-            <option value='Shirt'>- Shirt</option>
-            <option value='Pant'>- Pant</option>
+            className=' mr-3 border capitalize cursor-pointer border-gray-600 text-sm font-medium px-2 py-[2px]'>
+            {selectCategoryproduct.map((category, index) => <option key={index}>{category.name}</option>)}
           </select>
 
           {/* Select Size */}
-          <select
-            onChange={(e) => {
-              setSize(e.target.value)
-            }}
+          <select onChange={(e) => { setSize(e.target.value) }}
             value={size}
             className=' mr-3 border cursor-pointer capitalize border-gray-600 text-sm font-medium px-2 py-[2px] '>
-            {
-              selectSize.map(size => <option key={size.id}>{size.name.toLowerCase()}</option>)
-            }
+            {selectSize.map((size, index) => <option key={index}>{size.name.toLowerCase()}</option>)}
           </select>
 
-          <div>
-            {filterValue.length}
-            <button onClick={() => {
-              setSize('size all')
-              setSelectCategory('all')
-              setSearchItem('')
-              setFilterValue(products)
-            }} className=' cursor-pointer font-bold text-sky-500 flex items-center text-sm font-medium'><FaUndo className=' mr-1 text-xs' />Reset</button>
-          </div>
+          {/* Selected Products Length */}
+          <div className="text-2xl font-bold">{products.length}</div>
+
+          {/* Reset all  */}
+          <button onClick={() => {
+            setSize('size all')
+            setSelectCategory('all')
+            setSearchItem('')
+            setProducts(filterValue)
+          }} className=' cursor-pointer font-bold text-sky-500 flex items-center text-sm font-medium'><FaUndo className=' mr-1 text-xs' />Reset</button>
         </div>
 
         {/* Search input and Add To Cart */}
@@ -148,7 +132,7 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-      <Products products={filterValue} searchItem={searchItem}></Products>
+      <Products products={products}></Products>
 
     </div>
   );
