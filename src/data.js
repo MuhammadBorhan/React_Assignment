@@ -17,14 +17,17 @@ export const selectBrand = [
 // categories product list
 export const selectSize = [
   {
-    name: "M",
+    name: "size all",
   },
   {
-    name: "L",
+    name: "m",
   },
   {
-    name: "XL",
+    name: "l",
   },
+  {
+    name: "xl",
+  }
 ];
 
 export const brandProducts = [

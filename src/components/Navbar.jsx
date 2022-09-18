@@ -11,8 +11,8 @@ import Products from "./Products";
 const Navbar = () => {
   const [products, setProducts] = useState([]);
   const [filterValue, setFilterValue] = useState([])
-  const [selectValue, setselectValue] = useState('all');
-  const [size, setSize] = useState('all');
+  const [selectCategory, setSelectCategory] = useState('all');
+  const [size, setSize] = useState('size all');
 
   // Searching Functionality State
   const [searchItem, setSearchItem] = useState("");
@@ -27,34 +27,37 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (selectValue !== undefined) {
-      if (selectValue == 'all' && size == 'all') {
+    if (selectCategory !== undefined) {
+      if (selectCategory == 'all' && size == 'size all') {
         if (searchItem !== '') {
           const newValue = products.filter(product => (product.name.toLowerCase().includes(searchItem.toLowerCase())));
-          setFilterValue(newValue);
+          setFilterValue(newValue)
         } else {
-          setFilterValue(products);
+          setFilterValue(products)
         }
-      } else if (selectValue == 'all' && size !== 'all' && searchItem == '') {
-        const newValue = products.filter(product => (product.size === size));
-        setFilterValue(newValue);
+      } else if (selectCategory == 'all' && size !== 'size all' && searchItem == '') {
+        const newValue = products.filter(product => (product.size.toLowerCase() == size));
+        setFilterValue(newValue)
       } else if (searchItem !== '') {
-        const newvalue = products.filter(product => (product.name.toLowerCase().includes(searchItem.toLowerCase())));
-        setFilterValue(newvalue);
+        const newValue = products.filter(product => (product.name.toLowerCase().includes(searchItem.toLowerCase())));
+        setFilterValue(newValue)
       } else if (size !== undefined) {
-        if (size == 'all') {
-          const newValue = products.filter(product => (product.brand == selectValue && product.size !== size));
-          setFilterValue(newValue);
+        if (size == 'size all') {
+          const newValue = products.filter(product => (product.brand == selectCategory && product.size !== size));
+          setFilterValue(newValue)
+        } else {
+          const newValue = products.filter(product => (product.brand == selectCategory && product.size == size));
+          setFilterValue(newValue)
         }
       } else {
-        const newValue = products.filter(product => (product.brand == selectValue));
-        setFilterValue(newValue);
+        const newValue = products.filter(product => (product.brand == selectCategory));
+        setFilterValue(newValue)
       }
-    } else if (size !== 'all') {
+    } else if (size !== 'size all') {
       const newValue = products.filter(product => (product.size == size));
-      setFilterValue(newValue);
+      setFilterValue(newValue)
     }
-  }, [selectValue, size, searchItem]);
+  }, [selectCategory, size, searchItem])
 
   let data = []
   const handelValue = ({ id }) => {
@@ -81,10 +84,6 @@ const Navbar = () => {
     }
   }
 
-  // const handleClick = (e, index) => {
-  //   setItem({ name: e.target.textContent.toLowerCase() });
-  //   setActive(index);
-  // };
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-y-0">
@@ -92,39 +91,39 @@ const Navbar = () => {
         <div
           className="flex flex-col md:flex-row gap-y-3 md:gap-y-0 items-center justify-center md:justify-start gap-x-4"
         >
-          {/* select products */}
+          {/* select products category */}
           <select
             onChange={(e) => {
-              setselectValue(e.target.value)
+              setSelectCategory(e.target.value)
             }}
-            value={selectValue}
+            value={selectCategory}
             className=' mr-3 border cursor-pointer border-gray-600 text-sm font-medium px-2 py-[2px]'>
             <option value='all'>- All</option>
             <option value='Hoodies'>- Hoodies</option>
-            <option value='Shirt'>- Shart</option>
+            <option value='Shirt'>- Shirt</option>
             <option value='Pant'>- Pant</option>
           </select>
 
-          {/* Size Selection */}
+          {/* Select Size */}
           <select
             onChange={(e) => {
               setSize(e.target.value)
             }}
             value={size}
-            className=' mr-3 border cursor-pointer border-gray-600 text-sm font-medium px-2 py-[2px] '>
-            <option disabled value='all'>- all</option>
-            <option value='m'>- m</option>
-            <option value='l'>- l</option>
-            <option value='xl'>- xl</option>
+            className=' mr-3 border cursor-pointer capitalize border-gray-600 text-sm font-medium px-2 py-[2px] '>
+            {
+              selectSize.map(size => <option key={size.id}>{size.name.toLowerCase()}</option>)
+            }
           </select>
 
           <div>
+            {filterValue.length}
             <button onClick={() => {
-              setSize('all')
-              setselectValue('all')
+              setSize('size all')
+              setSelectCategory('all')
               setSearchItem('')
               setFilterValue(products)
-            }} className=' cursor-pointer flex items-center text-sm font-medium'><FaUndo className=' text-sky-500 mr-1 text-xs' />Reset</button>
+            }} className=' cursor-pointer font-bold text-sky-500 flex items-center text-sm font-medium'><FaUndo className=' mr-1 text-xs' />Reset</button>
           </div>
         </div>
 
